@@ -1,0 +1,19 @@
+.basicLightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.397);
+}
+
+.basicLightbox__placeholder {
+  & img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}

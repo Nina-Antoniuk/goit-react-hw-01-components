@@ -1,0 +1,22 @@
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 18px;
+  margin-right: 40px;
+}
+
+.serch-input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #424242;
+  background-color: transparent;
+
+  &:focus {
+    outline-offset: 5px;
+  }
+}
