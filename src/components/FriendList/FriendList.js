@@ -1,29 +1,33 @@
-// Необходимо создать компонент < FriendList >, с помощью которого мы могли бы отображать информацию о друзьях пользователя. 
-// Информация о друзьях хранится в файле friends.json.
-// Описание компонента FriendList
-// Компонент должен принимать один проп friends - массив объектов друзей.
+import PropTypes from 'prop-types';
+import styles from './FriendList.module.css';
 
-// Компонент должен создавать DOM следующей структуры.
+export function FriendList({friends}) {
+  return <ul className={styles.friendList}>
+    {friends.map(friend => {
+      return FriendListItem(friend)
+      })
+    }
+  </ul>
+}
 
-{/* <ul class="friend-list"> */}
-  {/* <!-- Произвольное кол-во FriendListItem, в зависимости от кол-ва объектов в массиве --> */}
-// </ul>
-// Описание компонента FriendListItem
-// Компонент должен принимать несколько пропов:
 
-// avatar - ссылка на аватар
-// name - имя друга
-// isOnline - буль сигнализирующий о состоянии друга, в сети или нет.
-// В зависимости от пропа isOnline, должен меняться цвет фона span.status. Это можно сделать через разный CSS-класс или Styled Components.
+function FriendListItem({ avatar, name, isOnline, id }) {
+  return <li className={styles.item} key={id}>
+            <span className={isOnline ? styles.statusOnLine : styles.statusOffLine}></span>
+            <img className={styles.avatar} src={avatar} alt="" width="48" />
+            <p className={styles.name}>{name}</p>
+         </li>
+}
 
-// Компонент должен создавать DOM следующей структуры.
+FriendList.default = {
+  avatar: 'https://dummyimage.com/640x480/2a2a2a/ffffff&text=Product+image+placeholder'
+}
 
-{/* <li class="item">
-  <span class="status"></span>
-  <img class="avatar" src="" alt="" width="48" />
-  <p class="name"></p>
-</li> */}
-// Пример использования
-// import friends from 'путь/к/friends.json';
-
-// <FriendList friends={friends} />,
+FriendList.propType = {
+  friends: PropTypes.arrayOf(PropTypes.shape({
+    avatar: PropTypes.string,
+    name: PropTypes.string,
+    isOnline: PropTypes.bool,
+    id: PropTypes.number
+  }))
+}

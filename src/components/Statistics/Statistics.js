@@ -1,38 +1,31 @@
-// Создать компонет <Statistics>, который бы отображал статистику по переданным пропам. К примеру загрузки в 
-// облако по типу файлов, посещение веб-страницы пользователями разных стран, финансовые траты и т. п. Данные
-//  о статистике лежат в файле statistical-data.json.
-// Описание компонента
-// Компонент должен принимать два пропа title и stats, в которых указывается заголовок и объект статистики.
+import PropTypes from 'prop-types';
+import styles from '../Statistics/Statistics.module.css';
 
-// title - не обязателен, и если он не передан, не должна рендериться разметка заголовка <h2>.
-// stats - массив объектов содержащих информацию о элементе статистики. Может иметь произвольное кол-во элементов.
-// Цвет фона элемента статистики в оформлении можно пропустить, либо создать функцию для генерации случайного цвета.
-// Компонент должен создавать DOM элемент следующей структуры.
+export function Statistics({ title, stats }) {
+  return <section className={styles.statistics}>
+           {title && <h2 className={styles.title}>Upload stats</h2>}
+         
+          <ul className={styles.statList}>
+            {stats.map(data => {             
+              return <li className={styles.item} key={data.id} style={{backgroundColor: `rgb(${color()})`}}>
+                <span className={styles.label}>{data.label}</span>
+                <span className={styles.percentage}>{data.percentage}%</span>
+             </li>})}
+           </ul>
+         </section>
+}
 
-<section class="statistics">
-  <h2 class="title">Upload stats</h2>
 
-  <ul class="stat-list">
-    <li class="item">
-      <span class="label">.docx</span>
-      <span class="percentage">4%</span>
-    </li>
-    <li class="item">
-      <span class="label">.mp3</span>
-      <span class="percentage">14%</span>
-    </li>
-    <li class="item">
-      <span class="label">.pdf</span>
-      <span class="percentage">41%</span>
-    </li>
-    <li class="item">
-      <span class="label">.mp4</span>
-      <span class="percentage">12%</span>
-    </li>
-  </ul>
-</section>
-// Пример использования
-// import statisticalData from '/путь/к/statistical-data.json';
 
-{/* <Statistics title="Upload stats" stats={statisticalData} />;
-<Statistics stats={statisticalData} />; */}
+function color() {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+  return `${r}, ${g}, ${b}`
+}
+
+
+Statistics.propTypes = {
+  title: PropTypes.string,
+  stats: PropTypes.array
+}
