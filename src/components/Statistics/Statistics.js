@@ -7,7 +7,7 @@ export function Statistics({ title, stats }) {
          
           <ul className={styles.statList}>
             {stats.map(data => {             
-              return <li className={styles.item} key={data.id} style={{backgroundColor: `rgb(${color()})`}}>
+              return <li className={styles.item} key={data.id} style={{backgroundColor: `rgb(${getColor()})`}}>
                 <span className={styles.label}>{data.label}</span>
                 <span className={styles.percentage}>{data.percentage}%</span>
              </li>})}
@@ -17,13 +17,13 @@ export function Statistics({ title, stats }) {
 
 
 
-function color() {
-  const r = Math.floor(Math.random() * 255);
-  const g = Math.floor(Math.random() * 255);
-  const b = Math.floor(Math.random() * 255);
-  return `${r}, ${g}, ${b}`
+function getColor() {
+  return `${createColorFragment()}, ${createColorFragment()}, ${createColorFragment()}`
 }
 
+function createColorFragment() {
+  return Math.floor(Math.random() * 255)
+}
 
 Statistics.propTypes = {
   title: PropTypes.string,
